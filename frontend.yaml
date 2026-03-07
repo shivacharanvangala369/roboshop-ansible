@@ -31,7 +31,7 @@
   - name: Unarchive frontend.zip
     ansible.builtin.unarchive:
       src: /tmp/frontend.zip
-      dest: /app
+      dest: /usr/share/nginx/html 
       remote_src: yes
 
   - name: Copy file Nginx Reverse Proxy Configuration
