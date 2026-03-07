@@ -8,8 +8,9 @@
     domain_name: devcops.online
     instances:
     - mongodb
-    - catalogue
     - redis
+    - user
+    - catalogue
   tasks:
   - name: Create Ec2 instances
     amazon.aws.ec2_instance:
