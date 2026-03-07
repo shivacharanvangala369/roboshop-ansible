@@ -6,11 +6,11 @@
     ansible.builtin.copy:
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
-      remote_src: yes
+      
 
   - name: Install mongodb package
     ansible.builtin.package:
-      name: mongodb
+      name: mongodb-org
       state: present
   
   - name: Update listen address from 127.0.0.1 to 0.0.0.0 in /etc/mongod.conf
