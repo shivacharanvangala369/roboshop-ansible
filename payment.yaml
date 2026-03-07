@@ -38,7 +38,7 @@
       remote_src: yes
 
   - name: Lets download the dependencies.
-     ansible.builtin.pip:
+    ansible.builtin.pip:
       requirements: /app/requirements.txt
       virtualenv: /app
 
