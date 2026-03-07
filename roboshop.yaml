@@ -73,6 +73,7 @@
   - name: delete  Route53 record
     amazon.aws.route53:
       state: absent
+      zone: "{{ domain_name }}"
       record: "{{ item }}-{{ env }}.{{ domain_name}}"  #mongodb-dev-devops.online 
       type: A
       ttl: 1
