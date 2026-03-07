@@ -4,6 +4,7 @@
   vars:
     sg_id: sg-0643d1da123417a9c
     ami_id: ami-0220d79f3f480ecf
+    envirolment: dev
     instances:
     - mongodb
     - catalogue
@@ -13,6 +14,15 @@
       instance_type: "t3.micro" 
       security_group: "{{ sg_id }}"  
       image_id: "{{ ami_id }}"
-      name: "{{ item }}"
-    loop: "{{ instances }}"
-    
+      name: "{{ item }}-{{ envirolment }}"
+      tags:
+        project: roboshop
+        component: "{{ item }}"
+        envirolment: "{{ envirolment}}"
+        NAME: "{{ item }}-{{ envirolment }}"
+    loop: "{{ intstances }}"
+    register: ec2_ouput
+
+- name: pringt output
+  ansible.builtin.debug:
+    msg: "{{ ec2_ouput }}""
