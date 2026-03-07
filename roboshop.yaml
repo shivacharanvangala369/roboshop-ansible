@@ -5,7 +5,7 @@
     sg_id: sg-0643d1da123417a9c
     ami_id: ami-0220d79f3f480ecf5
     env: dev
-    action: destroy
+    action: create
     domain_name: devcops.online
     instances:
     - mongodb
@@ -77,7 +77,7 @@
       record: "{{ item }}-{{ env }}.{{ domain_name}}"  #mongodb-dev-devops.online 
       type: A
       ttl: 1
-      wait: true
+      wait: false
     loop: "{{ instances }}"
     when: action == "destroy"
 
@@ -86,6 +86,6 @@
       instance_type: "t3.micro" 
       state: absent
       name: "{{ item }}-{{ env }}"
-      wait: true
+      wait: false
     loop: "{{ instances }}"
     when: action == "destroy"
