@@ -34,7 +34,7 @@
       dest: /app
       remote_src: yes
 
-    - name: mvn clean package 
+  - name: mvn clean package 
     ansible.builtin.command: mvn clean package 
 
   - name: Rename file from  target/shipping-1.0.jar shipping.jar
