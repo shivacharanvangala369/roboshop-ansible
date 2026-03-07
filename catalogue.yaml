@@ -38,7 +38,7 @@
       remote_src: yes
       
 
-  - name: cd /app
+  - name: npm install
     ansible.builtin.command: npm install
 
   - name: Copy file to catalogue.service
