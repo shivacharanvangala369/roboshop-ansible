@@ -18,7 +18,7 @@ useradd --system --home /app --shell /sbin/nologin --comment "roboshop system us
       system: true
       home: /app
       shell: /sbin/nologin
-      comments: "roboshop system user"
+      comment: "roboshop system user"
 
   - name: Create a app DIR
     ansible.builtin.file:
