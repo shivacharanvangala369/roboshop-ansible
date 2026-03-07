@@ -1,0 +1,13 @@
+- name: craete Ec2 and Route53 records
+  hosts: all
+  connection: local
+  vars:
+    sg_id: sg-0643d1da123417a9c
+    ami_id: ami-0220d79f3f480ecf
+  tasks:
+  - name: Create Ec2 instances
+    amazon.aws.ec2_instance:
+      instance_type: "t3.micro" 
+      security_group: "{{ sg_id }}"  
+      image_id: "{{ ami_id }}"
+    
