@@ -70,7 +70,7 @@
   - name: Load Master Data
     ansible.builtin.shell: mysql -h mysql-dev.devcops.online -uroot -pRoboShop@1 < /app/db/master-data.sql
 
-  - name: reStart service shipping
+  - name: Restart service shipping
     ansible.builtin.service:
       name: shipping
       state: restarted
