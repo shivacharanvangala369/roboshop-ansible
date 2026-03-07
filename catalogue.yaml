@@ -48,10 +48,10 @@
       src: catalogue.service
       dest: /etc/systemd/system/catalogue.service
 
-  - name: Start service mongodb
+  - name: Start service catalogue
     ansible.builtin.service:
       daemon_reload: true
-      name: mongod
+      name: catalogue
       enabled: yes
       state: started
 
