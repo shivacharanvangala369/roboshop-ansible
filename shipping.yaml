@@ -44,3 +44,13 @@
     ansible.builtin.copy:
       src: shipping.service
       dest: /etc/systemd/system/shipping.service
+
+  - name: Start service shipping
+    ansible.builtin.service:
+      daemon_reload: true
+      name: shipping
+      enabled: yes
+      state: started
+
+  - name: dnf install mysql -y 
+    ansible.builtin.command: dnf install mysql -y 

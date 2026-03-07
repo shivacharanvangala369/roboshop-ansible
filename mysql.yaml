@@ -2,8 +2,13 @@
   hosts: mysql
   become: yes
   tasks:
-  - name: dnf install mysql-server -y
-    ansible.builtin.command: dnf install mysql-server -y
+  # - name: dnf install mysql-server -y
+  #   ansible.builtin.command: dnf install mysql-server -y
+  
+  - name: install mysql-server
+    ansible.builtin.package:
+      name: mysql-server
+      state: present
 
   - name: Start mysql redis
     ansible.builtin.service:
