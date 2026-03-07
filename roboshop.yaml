@@ -3,7 +3,7 @@
   connection: local
   vars:
     sg_id: sg-0643d1da123417a9c
-    ami_id: ami-0220d79f3f480ecf
+    ami_id: ami-0220d79f3f480ecf5
     envirolment: dev
     instances:
     - mongodb
