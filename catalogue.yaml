@@ -66,7 +66,7 @@
       state: present
 
   - name: Load MongoDB master data
-    ansible.builtin.shell: mongosh --host {{ mongodb-dev.devcops.online }} < /app/db/master-data.js
+    ansible.builtin.shell: mongosh --host mongodb-dev.devcops.online < /app/db/master-data.js
 
   - name:  check data is loaded into mongodb or not Connect to MongoDB
     ansible.builtin.shell: mongosh --host mongodb-dev.devcops.online
