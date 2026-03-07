@@ -18,11 +18,11 @@
   - name: Update protected-mode from yes to no in /etc/redis/redis.conf
     ansible.builtin.replace:
       path: /etc/redis/redis.conf
-      regexp: '^protected-mode yes'
+      regexp: 'protected-mode'
       replace: 'protected-mode no'
 
   - name: Start service redis
     ansible.builtin.service:
       name: redis
       enabled: yes
-      state: started
+      state: restarted
