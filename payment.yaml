@@ -8,6 +8,7 @@
         - python3 
         - gcc 
         - python3-devel
+        - python3-virtualenv
       state: present
 
   - name: create system user roboshop
