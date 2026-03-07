@@ -31,7 +31,7 @@
   - name: Create Route53 records
     amazon.aws.route53:
       state: present
-      zone: "{{ devcops.online }}"
+      zone: "{{ domain_name }}"
       record: "{{ item.item }}-{{ env }}.{{ domain_name}}"
       type: A
       ttl: 1
