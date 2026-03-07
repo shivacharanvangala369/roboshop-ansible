@@ -19,7 +19,7 @@
       image_id: "{{ ami_id }}"
       exact_count: 1
       filters:
-        tag:NAME: "{{ item }}-{{ env }}"
+        tag:Name: "{{ item }}-{{ env }}"
         instance-state-name: running
       tags:
         project: roboshop
