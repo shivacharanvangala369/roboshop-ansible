@@ -5,6 +5,7 @@
     sg_id: sg-0643d1da123417a9c
     ami_id: ami-0220d79f3f480ecf5
     envirolment: dev
+    domain_name: devcops.online
     instances:
     - mongodb
     - catalogue
@@ -26,3 +27,14 @@
   - name: print output
     ansible.builtin.debug:
       msg: "{{ ec2_output }}"
+  
+  - name: Create Route53 records
+    amazon.aws.route53:
+      state: present
+      zone: "{{ devcops.online }}"
+      record: "{{ item.item }}-{{ env }}.{{ domain_name}}"
+      type: A
+      ttl: 7200
+      value: "{{item.instance[0].private_ip_address }}"
+      wait: true
+      loop: "{{ ec2_ouput.results }}"
