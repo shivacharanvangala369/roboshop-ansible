@@ -18,18 +18,26 @@
       shell: /sbin/nologin
       comment: "roboshop system user"
 
+  - name: delete a app DIR
+    ansible.builtin.file:
+      path: /app
+      state: absent
+
   - name: Create a app DIR
     ansible.builtin.file:
       path: /app
       state: directory
+
+  - name: delete catalogue code
+    ansible.builtin.file:
+      path: /tmp/catalogue.zip
+      state: absent
 
   - name: Download user code
     ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip 
       dest: /tmp/user.zip
 
-  - name: cd /app
-    ansible.builtin.command: cd /app 
   
   - name: Unarchive user.zip
     ansible.builtin.unarchive:
@@ -37,20 +45,19 @@
       dest: /app
       remote_src: yes
 
-  - name: npm install
-    ansible.builtin.command: npm install
-    args:
-      chdir: /app
+  - name: npm install dependencies
+    community.general.npm:
+      path: /app
 
   - name: Copy file to user.service
     ansible.builtin.copy:
       src: user.service
       dest: /etc/systemd/system/user.service
 
-  - name: Start user catalogue
+  - name: restart user catalogue
     ansible.builtin.service:
       daemon_reload: true
       name: user
       enabled: yes
-      state: started
+      state: restarted
       
