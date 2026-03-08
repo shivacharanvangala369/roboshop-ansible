@@ -49,8 +49,8 @@
 
   - name: Lets download the dependencies.
     ansible.builtin.pip:
-      requirements: /app/requirements.txt
-      executable: pip3
+      requirements: /requirements.txt
+      executable: pip3.9
 
   - name: Copy file to payment.service
     ansible.builtin.template:
