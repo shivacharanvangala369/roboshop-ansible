@@ -8,8 +8,8 @@
       dest: /etc/yum.repos.d/rabbitmq.repo
 
   - name: Install RabbitMQ
-    ansible.builtin.package:
-      name: rabbitmq
+    ansible.builtin.dnf:
+      name: rabbitmq-server
       state: present
 
   - name: Start service RabbitMQ
