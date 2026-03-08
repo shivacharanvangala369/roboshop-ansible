@@ -54,7 +54,7 @@
       dest: /etc/systemd/system/catalogue.service
 
   - name: Copy file to mongo.repo
-    ansible.builtin.copy:
+    ansible.builtin.template:
       src: mongo.repo
       dest: /etc/yum.repos.d/mongo.repo
 
@@ -76,9 +76,12 @@
     ansible.builtin.shell: mongosh --host "{{ MONGODB_HOST }}"  </app/db/master-data.js
     when: catalogue_output.stdout | int < 0
 
+  - name: demon-reload
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
   - name: Start service catalogue
     ansible.builtin.service:
-      daemon_reload: true
       name: catalogue
       enabled: yes
       state: restarted
