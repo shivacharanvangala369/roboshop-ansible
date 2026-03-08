@@ -63,6 +63,14 @@
   - name: demon-reload
     ansible.builtin.systemd_service:
       daemon_reload: true
+
+  - name: install dependencies
+    ansible.builtin.pip:
+      name: "{{ item }}"
+      exectable: pip3.9
+    loop:
+    - crytography
+    - PyMySQL
       
   - name: import shipping data
     community.mysql.mysql_db:
