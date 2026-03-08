@@ -9,7 +9,7 @@
 
   - name: Install RabbitMQ
     ansible.builtin.package:
-      name: rabbitmq-server
+      name: rabbitmq
       state: present
 
   - name: Start service RabbitMQ
