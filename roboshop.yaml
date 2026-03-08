@@ -1,5 +1,5 @@
 # ansible-playbook -i localhost, -e "instances=['mongodb','catalogue','redis','user','cart','mysql','shipping',
-#  'rabbitmq','payment']" roboshop.yaml
+#  'rabbitmq','payment','frontend']" roboshop.yaml
 
 - name: craete Ec2 and Route53 records
   hosts: all

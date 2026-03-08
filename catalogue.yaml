@@ -37,11 +37,9 @@
       dest: /app
       remote_src: yes
       
-
-  - name: npm install
-    ansible.builtin.command: npm install
-    args:
-      chdir: /app
+  - name: npm install dependencies
+    community.general.npm:
+      path: /app
 
   - name: Copy file to catalogue.service
     ansible.builtin.copy:
@@ -66,7 +64,15 @@
       state: present
 
   - name: Load MongoDB master data
-    ansible.builtin.shell: mongosh --host mongodb-dev.devcops.online < /app/db/master-data.js
+    ansible.builtin.command: mongosh --host "{{ MONGODB_HOST }}" --quiet  --eval 'db.getMongo().getDBNames().indexO1oOf("catalogue")'
+    register: catalogue_output
+
+  - name: print catalogue_output
+    ansible.builtin.debug:
+      msg: "{{ catalogue_output }}"    
+
+
+
 
   # - name:  check data is loaded into mongodb or not Connect to MongoDB
   #   ansible.builtin.shell: mongosh --host mongodb-dev.devcops.online
