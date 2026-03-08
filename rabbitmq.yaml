@@ -14,14 +14,22 @@
 
   - name: Start service RabbitMQ
     ansible.builtin.service:
-      name: rabbitmq-server
+      name: rabbitmq
       enabled: yes
-      state: started
+      state: restarted
 
   - name: Chnage RabbitMQ default username / password
-    ansible.builtin.command: rabbitmqctl add_user roboshop roboshop123
+    community.rabbitmq.rabbitmq_user: rabbitmqctl add_user roboshop roboshop123
+      user: roboshop
+      password: roboshop123
+      permissions:
+        - vhost: /
+          configure_priv: .*
+          read_priv: .*
+          write_priv: .*
+      state: present
+      
 
-  - name: set_permissions RabbitMQ 
-    ansible.builtin.shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+
 
   
