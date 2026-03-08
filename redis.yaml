@@ -10,12 +10,6 @@
       name: redis
       state: present
 
-  - name: Start service redis
-    ansible.builtin.service:
-      name: redis
-      enabled: yes
-      state: started
-
   - name: Update listen address from 127.0.0.1 to 0.0.0.0 in /etc/redis/redis.conf
     ansible.builtin.replace:
       path: /etc/redis/redis.conf
@@ -23,12 +17,14 @@
       replace: '0.0.0.0'
 
   - name: Update protected-mode from yes to no in /etc/redis/redis.conf
-    ansible.builtin.replace:
+    ansible.builtin.lineinfile:
       path: /etc/redis/redis.conf
-      regexp: '^protected-mode yes'
-      replace: 'protected-mode no'
+      regexp: 'protected-mode'
+      line: 'protected-mode no'
 
-  - name: ReStart service redis
+  - name: Restart service redis
     ansible.builtin.service:
       name: redis
+      enabled: yes
       state: restarted
+
