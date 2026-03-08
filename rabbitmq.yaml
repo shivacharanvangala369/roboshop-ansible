@@ -20,7 +20,7 @@
 
   - name: Chnage RabbitMQ default username / password
     community.rabbitmq.rabbitmq_user: rabbitmqctl add_user roboshop roboshop123
-      user: roboshop
+      user: "roboshop"
       password: roboshop123
       permissions:
         - vhost: /

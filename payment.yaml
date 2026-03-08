@@ -4,11 +4,12 @@
   tasks:
   - name: Install Python 3
     ansible.builtin.package:
-      name:
-        - python3 
-        - gcc 
-        - python3-devel
+      name: "{{ item }}"
       state: present
+    loop:
+    - python3 
+    - gcc 
+    - python3-devel
 
   - name: create system user roboshop
     ansible.builtin.user:
@@ -18,18 +19,27 @@
       shell: /sbin/nologin
       comment: "roboshop system user"
 
+  - name: delete a app DIR
+    ansible.builtin.file:
+      path: /app
+      state: absent
+
+
   - name: Create a app DIR
     ansible.builtin.file:
       path: /app
       state: directory
+
+  - name: delete payment code
+    ansible.builtin.file:
+      path: /tmp/payment.zip
+      state: absent
   
   - name: Download payment code
     ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip 
       dest: /tmp/payment.zip
 
-  - name: cd /app
-    ansible.builtin.command: cd /app 
   
   - name: Unarchive payment.zip
     ansible.builtin.unarchive:
@@ -43,15 +53,18 @@
       executable: pip3
 
   - name: Copy file to payment.service
-    ansible.builtin.copy:
+    ansible.builtin.template:
       src: payment.service
       dest: /etc/systemd/system/payment.service
 
+  - name: demon-reload
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+
   - name: Start service payment
     ansible.builtin.service:
-      daemon_reload: true
       name: payment
       enabled: yes
-      state: started
+      state: restarted
 
       
